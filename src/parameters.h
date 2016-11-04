@@ -59,6 +59,10 @@ struct Parameters {
   std::string poloniexApi;
   std::string poloniexSecret;
   double poloniexFees;
+  double bittrexFees;
+  std::string bittrexApi;
+  std::string bittrexSecret;
+
 
   bool sendEmail;
   std::string senderAddress;

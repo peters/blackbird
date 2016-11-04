@@ -48,6 +48,9 @@ Parameters::Parameters(std::string fileName) {
   poloniexApi = getParameter("PoloniexApiKey", configFile);
   poloniexSecret = getParameter("PoloniexSecretKey", configFile);
   poloniexFees = getDouble(getParameter("PoloniexFees", configFile));
+  bittrexApi = getParameter("BittrexApiKey", configFile);
+  bittrexSecret = getParameter("BittrexSecretKey", configFile);
+  bittrexFees = getDouble(getParameter("BittrexFees", configFile));
 
   sendEmail = getBool(getParameter("SendEmail", configFile));
   senderAddress = getParameter("SenderAddress", configFile);
