@@ -22,6 +22,7 @@
 #include "exchange/itbit.h"
 #include "exchange/btce.h"
 #include "exchange/poloniex.h"
+#include "exchange/bittrex.h"
 #include "utils/send_email.h"
 
 // typedef declarations needed for the function arrays
@@ -185,6 +186,21 @@ int main(int argc, char** argv) {
       createTable(dbTableName[index], params);
     }
     index++;
+  }
+  if (params.bittrexApi.empty() == false || params.demoMode == true) {
+	  params.addExchange("Bittrex", params.bittrexFees, true, false);
+	  getQuote[index] = Bittrex::getQuote;
+	  getAvail[index] = Bittrex::getAvail;
+	  sendLongOrder[index] = Bittrex::sendLongOrder;
+	  sendShortOrder[index] = Bittrex::sendShortOrder;
+	  isOrderComplete[index] = Bittrex::isOrderComplete;
+	  getActivePos[index] = Bittrex::getActivePos;
+	  getLimitPrice[index] = Bittrex::getLimitPrice;
+	  if (params.useDatabase) {
+		  dbTableName[index] = "bittrex";
+		  createTable(dbTableName[index], params);
+	  }
+	  index++;
   }
   if (index < 2) {
     std::cout << "ERROR: Blackbird needs at least two Bitcoin exchanges. Please edit the config.json file to add new exchanges\n" << std::endl;
